@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Fare Prediction Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <style>
+        @keyframes transitionIn {
+            from{
+                transform: scale(1.5);
+            }
+            to{
+                transform: scale(1);
+            }
+        }
+        body{
+            background-color:#333;
+            font-family: 'Raleway', sans-serif;
+            font-size: 17px;
+            height: 700px;
+        }
+        .container{
+            max-width:800px;
+            height:500px;
+            margin:15px auto;
+        }
+        .box-1{
+            background-color:#fff;
+            width:50%;
+            height:500px;
+            float:left;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+        .box-2{
+            width:50%;
+            height:500px;
+            float:right;
+            overflow: hidden;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .box-2 img{
+            animation: transitionIn 3s;
+            display: inline-block;
+            transform: scale(1);
+            transition: 2s ease-in-out;      
+        }
+        .box-2 img:hover{
+            transform: scale(1.5);
+        }  
+        .title-card h3{
+            text-align: center;
+        }
+        .title-card p{
+            text-align: center;
+        }
+        .input-card{
+            margin: 5px 10px;
+            line-height: 3.2em;
+        }
+        .input-card label{
+            display:inline;
+            margin-left: 5px;
+        }
+        .input-card select{
+            float:right;
+            display:inline;
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: sans-serif;
+            color: #333;
+            line-height: 1.1;
+            padding: .4em 1.4em .2.7em .5em;
+            height:25px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            width : 140px;
+            background-color: #fff;
+            border-color: #CFECD5;
+            margin-top: 15px;
+            margin-bottom:8px;
+        }
+        .input-card input{
+            float:right;
+            display:inline;
+            margin-right: 10px;
+            padding: .4em 1.4em .2.7em .5em;
+            box-sizing: border-box;
+            width : 140px;
+            margin-top: 15px;
+            margin-bottom:8px;
+        }
+        .btn{
+        height:32px;
+        display: block;
+        width: 91%;
+        margin-top: 5px;
+        margin-left: 15px;
+        border-radius: 5px;
+        border:1px solid;
+        background-color : #D79696; 
+        color: #fff;
+        }
+        .btn:hover{
+            background-color:#D85959;
+            cursor: pointer;
+        }
+        .clr{
+            clear: both;
+        }
+        .box-3{
+            background-color:#fff;
+            
+            width:100%;
+            height:127px;
+            border-radius: 8px;
+        }
+        .box-3 p{
+            line-height: 0.5em;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class = "container">
+        <div class = "box-1">
+            <div class="title-card">
+                <h3>Flight Fare Prediction App</h3>
+                <p>Welcome!</p>
+            </div>
+            <form action="{{ url_for('home')}}" method="POST">
+                <div class = "input-card">
+                    <label for="Source">Source</label>
+                    <select name="Source" id="Source" class="">
+                    <option value="Delhi" selected>Delhi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Banglore">Banglore</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Chennai">Chennai</option>
+                    </select>
+                </div>
+                <div class = "input-card">
+                    <label for="Destination">Destination</label>
+                    <select name="Destination" id="Destination">
+                    <option value="Cochin" selected>Cochin</option>
+                    <option value="Banglore">Banglore</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="New Delhi">New Delhi</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Kolkata">Kolkata</option>
+                    </select>
+                </div>
+                <div class = "input-card">
+                    <label for="Airline">Air Line</label>
+                    <select name="Airline" id="Airline">
+                    <option value="Jet Airways" selected>Jet Airways</option>
+                    <option value="IndiGo">IndiGo</option>
+                    <option value="Air India">Air India</option>
+                    <option value="Multiple carriers">Multiple carriers</option>
+                    <option value="SpiceJet">SpiceJet</option>
+                    <option value="Vistara">Vistara</option>
+                    <option value="Air Asia">Air Asia</option>
+                    <option value="GoAir">GoAir</option>
+                    <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+                    <option value="Vistara Premium economy">Vistara Premium economy</option>
+                    <option value="Trujet">Trujet</option>
+                    </select>
+                </div>
+                <div class = "input-card">
+                    <label for="Date_of_Journey">Date of Journey</label>
+                    <input type="date" name="Date_of_Journey" id="Date_of_Journey" min="2019-03-01" max="2019-06-27" required="required">
+                </div>
+                <div class = "input-card">
+                    <label for="dep_time">Departure Time</label>
+                    <input type="time" name="dep_time" id="dep_time" required="required">
+                </div>
+                <div>
+                    <div class = "input-card">
+                        <label for="Total Stops">Total Stops</label>
+                        <select name="Total Stops" id="Total Stops">
+                        <option value="non-stop" selected>non-stop</option>
+                        <option value="1 stop">1 stop</option>
+                        <option value="2 stops">2 stops</option>
+                        <option value="3 stops">3 stops</option>
+                        <option value="4 stops">4 stops</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn" value="Submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="box-2">
+            <img src="https://images.unsplash.com/photo-1507812984078-917a274065be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="" height=500px width=400px>
+        </div>
+        <div class="clr"></div>
+        <div class="box-3">
+            <p>The cost of your travel will be <strong>{{price}} rupees(₹)</strong>.</p>
+            <p>The duration of your travel will be <strong>{{hour}} h and {{minute}} m</strong>.</p>
+            <p>You will arrive at your destination at <strong>{{arrival_time}}</strong>.</p>
+        </div>
+    </div>
+</body>
+</html>
